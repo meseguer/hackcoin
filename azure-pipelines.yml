@@ -10,6 +10,6 @@ pool:
   vmImage: "Ubuntu-16.04"
 
 steps:
-  - script: sudo npm install -g @angular/cli
+  - script: sudo npm install -g truffle
   - script: truffle test
     displayName: "Run a multi-line script"
