@@ -11,5 +11,5 @@ pool:
 
 steps:
   - script: sudo npm install -g truffle
-  - script: truffle test
+  - script: sudo truffle test
     displayName: "Run a multi-line script"
