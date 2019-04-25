@@ -12,4 +12,4 @@ pool:
 steps:
   - script: sudo npm install -g truffle
   - script: sudo truffle test
-    displayName: "Run a multi-line script"
+    displayName: "Test contracts"
