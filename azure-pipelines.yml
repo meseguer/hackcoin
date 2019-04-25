@@ -9,11 +9,11 @@ trigger:
 pool:
   vmImage: "Ubuntu-16.04"
 
-steps:
-  - script: truffle test
-    displayName: "Run a one-line script"
+- task: Npm@1
+  inputs:
+    command: 'install -g truffle' # Options: install, publish, custom
 
+steps:
   - script: |
-      echo Add other tasks to build, test, and deploy your project.
-      echo See https://aka.ms/yaml
+      truffle test
     displayName: "Run a multi-line script"
