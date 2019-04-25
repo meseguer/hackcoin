@@ -9,10 +9,8 @@ trigger:
 pool:
   vmImage: "Ubuntu-16.04"
 
-- task: Npm@1
-  inputs:
-    command: 'install -g truffle' # Options: install, publish, custom
-
 steps:
-  - script: truffle test
-    displayName: "Run a one-line script"
+  - script: |
+      npm install -g truffle
+      truffle test
+    displayName: "Run a multi-line script"
