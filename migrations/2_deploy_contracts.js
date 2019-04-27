@@ -4,5 +4,5 @@ const EventBooking = artifacts.require("EventBooking");
 module.exports = function(deployer) {
   // deployer.deploy(Owned);
   // deployer.link(EventBooking, Owned);
-  deployer.deploy(EventBooking);
+  deployer.deploy(EventBooking, 10);
 };
