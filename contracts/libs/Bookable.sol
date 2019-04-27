@@ -9,6 +9,9 @@ import { Hostable } from "./Hostable.sol";
 
 contract Bookable is Hostable
 {
+    function getFiatCost() internal view returns (uint256);
+    event NewBooking();
+
     uint256 public cost;
     uint limit;
     
@@ -16,9 +19,6 @@ contract Bookable is Hostable
     constructor(uint256 eventCost) public {
         cost = eventCost;
     }
-
-    // returns $5.00 USD in ETH wei.
-    function getFiatCost() internal view returns (uint256);
 
     /// @notice Book a place in the event. 75% refund if you don't attend.
     /// @dev The Alexandr N. Tetearing algorithm could increase precision
@@ -31,11 +31,9 @@ contract Bookable is Hostable
         require (participantAddresses.length < limit);
         // Pay amount required
         require (msg.value >= getFiatCost());
-        // Save them as participants
-        participants[msg.sender] = Participant({booked: true, arrived: false});
-        // emit NewParticipant(msg.sender);
+        _saveParticipant(msg.sender);
+        emit NewBooking();
     }
-
     
     /// @notice Cancel booking, can only get a full refund if less than 50% of the people have confirmed their attendance.
     /// @dev We're still not set in the refunding conditions.
@@ -88,4 +86,6 @@ contract Bookable is Hostable
         // Check if less than 50 percent of participants have gone
         return (totalArrived <= (arrayLength / 2));
     }
+
+    
 }
