@@ -1,6 +1,5 @@
 pragma solidity >=0.4.25 <0.6.0;
 
-import { Owned } from "./libs/Owned.sol";
 import { FiatContract } from "./libs/FiatContract.sol";
 import { Bookable } from "./libs/Bookable.sol";
 import { Refundable } from "./libs/Refundable.sol";
@@ -10,9 +9,8 @@ import { Refundable } from "./libs/Refundable.sol";
 /// @notice You can use this contract for only the most basic simulation
 /// @dev All function calls are currently implemented without side effects
 
-contract Event is Owned, Refundable
+contract Event is Refundable
 {
-    address InstanceOwner;
     uint256 public cost;
     uint limit;
     // implemenet cost
@@ -21,7 +19,6 @@ contract Event is Owned, Refundable
     
     // Create contract, it costs money to the owner
     constructor(uint256 eventCost) public {
-        InstanceOwner = msg.sender;
         price = FiatContract(0x8055d0504666e2B6942BeB8D6014c964658Ca591);        
         cost = eventCost;
     }
@@ -32,5 +29,5 @@ contract Event is Owned, Refundable
         uint256 ethCent = price.USD(0);
         // $0.01 * 500 = $5.0
         return ethCent * (cost * 100);
-    } 
+    }
 }

@@ -2,10 +2,8 @@ pragma solidity >=0.4.25 <0.6.0;
 
 import { Hostable } from "./Hostable.sol";
 
-/// @title A supporting contract for event booking
-/// @author Ruben B. Meseguer
+/// @title Contains functionality to book an event
 /// @notice Allow users to book, cancel and get a refund for an item.
-/// @dev All function calls are currently implemented without side effects
 
 contract Bookable is Hostable
 {
@@ -23,17 +21,14 @@ contract Bookable is Hostable
         cost = eventCost;
     }
 
-    /// @notice Book a place in the event. 75% refund if you don't attend.
-    /// @dev The Alexandr N. Tetearing algorithm could increase precision
-    /// @param rings The number of rings from dendrochronological sample
-    /// @return Encoded QR CODE. It'll be used by the organizers to configm your attendance.
-    
-    // Fundation will get 1% of every booking.
+    /// @notice Book a place in the event. Fundation will get 1% of every booking.
+
     function book() public payable {
         // Don't overbook
         require (participantAddresses.length < limit);
         // Pay amount required
-        require (msg.value >= getFiatCost());
+        require (msg.value >= _getFiatCost());
+
         _saveParticipant(msg.sender);
         emit NewBooking();
     }
@@ -62,25 +57,5 @@ contract Bookable is Hostable
     function cancelEvent() public onlyOwner {
         _refundAll();        
     }
-
-    /// @notice Confirms the user attended the event and sends the money to the organizer.
-    /// @dev We're still not sure if sending the money needs to wait a few minutes.
-    function _canFullRefund() internal view returns (bool) {
-        // We know the length of the array
-        uint arrayLength = participantAddresses.length;
-        // totalValue auto init to 0
-        uint totalArrived;
-        for (uint i=0; i < arrayLength; i++) {
-            address participantAddress = participantAddresses[i];
-            Participant memory participant = participants[participantAddress];
-            
-            if(participant.arrived) {
-                totalArrived++;
-            }
-        }
-        // Check if less than 50 percent of participants have gone
-        return (totalArrived <= (arrayLength / 2));
-    }
-
     
 }
