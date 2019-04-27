@@ -1,37 +1,24 @@
 pragma solidity >=0.4.25 <0.6.0;
 
-// import { Owned } from "./libs/Owned.sol";
-// import { FiatContract } from "./libs/FiatContract.sol";
 import { Hostable } from "./Hostable.sol";
 
-/// @title A contract for event booking between an organizer and multiple participants
+/// @title A supporting contract for event booking
 /// @author Ruben B. Meseguer
-/// @notice You can use this contract for only the most basic simulation
+/// @notice Allow users to book, cancel and get a refund for an item.
 /// @dev All function calls are currently implemented without side effects
 
 contract Bookable is Hostable
 {
-    address InstanceOwner;
     uint256 public cost;
     uint limit;
-    // implemenet cost
-    FiatContract public price;
-    event NewPayment(address sender, uint256 amount);
     
     // Create contract, it costs money to the owner
     constructor(uint256 eventCost) public {
-        InstanceOwner = msg.sender;
-        price = FiatContract(0x8055d0504666e2B6942BeB8D6014c964658Ca591);        
         cost = eventCost;
     }
 
     // returns $5.00 USD in ETH wei.
-    function getFiatCost() internal view returns (uint256) {
-        // returns $0.01 ETH wei
-        uint256 ethCent = price.USD(0);
-        // $0.01 * 500 = $5.0
-        return ethCent * (cost * 100);
-    } 
+    function getFiatCost() internal view returns (uint256);
 
     /// @notice Book a place in the event. 75% refund if you don't attend.
     /// @dev The Alexandr N. Tetearing algorithm could increase precision
@@ -49,6 +36,10 @@ contract Bookable is Hostable
         // emit NewParticipant(msg.sender);
     }
 
+    
+    /// @notice Cancel booking, can only get a full refund if less than 50% of the people have confirmed their attendance.
+    /// @dev We're still not set in the refunding conditions.
+
     function cancel() public payable {
         // Check user has booked a place
         require(participants[msg.sender].booked == true);
@@ -65,7 +56,9 @@ contract Bookable is Hostable
         require(msg.sender.send(amountToRefund));
     }
 
-    // After confirming, users will have 5 minutes to refund 
+    /// @notice Confirms the user attended the event and sends the money to the organizer.
+    /// @dev We're still not sure if sending the money needs to wait a few minutes.
+ 
     function confirmAttendance() public payable {
         Participant memory participant = participants[msg.sender];
         require(participant.booked && !participant.arrived);
@@ -76,7 +69,9 @@ contract Bookable is Hostable
     // function cancelEvent() public onlyOwner {
         
     // }
-
+    
+    /// @notice Confirms the user attended the event and sends the money to the organizer.
+    /// @dev We're still not sure if sending the money needs to wait a few minutes.
     function _canFullRefund() internal view returns (bool) {
         // We know the length of the array
         uint arrayLength = participantAddresses.length;

@@ -2,14 +2,14 @@ pragma solidity >=0.4.25 <0.6.0;
 
 import { Owned } from "./libs/Owned.sol";
 import { FiatContract } from "./libs/FiatContract.sol";
-import { Hostable } from "./libs/Hostable.sol";
+import { Bookable } from "./libs/Bookable.sol";
 
 /// @title A contract for event booking between an organizer and multiple participants
 /// @author Ruben B. Meseguer
 /// @notice You can use this contract for only the most basic simulation
 /// @dev All function calls are currently implemented without side effects
 
-contract EventBooking is Owned, Hostable
+contract Event is Owned, Bookable
 {
     address InstanceOwner;
     uint256 public cost;
