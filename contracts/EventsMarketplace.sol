@@ -24,7 +24,7 @@ contract EventBooking is Owned
     uint limit;
 
     // Create contract, it costs money to the owner
-    constructor(string memory description, uint eventCost) public payable {
+    constructor() public payable {
         price = FiatContract(0x8055d0504666e2B6942BeB8D6014c964658Ca591);        
         InstanceOwner = msg.sender;
         cost = 5;
@@ -93,10 +93,10 @@ contract EventBooking is Owned
         participant.arrived = true;
     }
 
-    // Refund all the money. Owner loses deposited money, which is distributed among participants
-    function cancelEvent() public onlyOwner {
+    // // Refund all the money. Owner loses deposited money, which is distributed among participants
+    // function cancelEvent() public onlyOwner {
         
-    }
+    // }
 
     function _canFullRefund() internal view returns (bool) {
         // We know the length of the array
