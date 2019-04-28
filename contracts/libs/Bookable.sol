@@ -8,7 +8,7 @@ import { Priceable } from "./Priceable.sol";
 
 contract Bookable is Hostable, Priceable
 {
-    function _refund(address participant) internal view;
+    function _refund(address participant) internal;
     function _refundAll() internal view;
 
     event NewBooking();

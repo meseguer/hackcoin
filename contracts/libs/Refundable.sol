@@ -10,9 +10,9 @@ import { Bookable } from "./Bookable.sol";
 contract Refundable is Bookable
 {
 
-    function _refund() internal {
+    function _refund(address participantAddress) internal {
         // Check user has booked a place
-        require(participants[msg.sender].booked == true);
+        require(participants[participantAddress].booked == true);
         // Remove them from array of participants
         // Change their status to cancel
         uint amountToRefund;
@@ -23,7 +23,8 @@ contract Refundable is Bookable
             // Refund 75 percent of the ticket
             amountToRefund = _getEtherCost(cost) * 7500 / 10000;
         }
-        require(msg.sender.send(amountToRefund));
+        address payable payableParticipant = address(uint160(participantAddress)); // This is correct
+        require(payableParticipant.send(amountToRefund));
     }
 
     function _refundAll() internal view {
