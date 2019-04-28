@@ -1,8 +1,8 @@
-const EventBooking = artifacts.require("EventBooking");
+const Event = artifacts.require("Event");
 
-contract("EventBooking", accounts => {
+contract("Event", accounts => {
   it("should create event costing 100 USD to book", async () => {
-    var eventInstance = await EventBooking.new(100);
+    var eventInstance = await Event.new(100);
     const eventCost = await eventInstance.cost();
     assert.equal(eventCost.toNumber(), 100, "Event cost wasn't 100 USD");
   });

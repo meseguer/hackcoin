@@ -1,0 +1,459 @@
+{
+  "contractName": "Event",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "book",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "participants",
+      "outputs": [
+        {
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "name": "booked",
+          "type": "bool"
+        },
+        {
+          "name": "arrived",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "cost",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getTotalArrived",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "participantIndex",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "price",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "limit",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "participantAddress",
+          "type": "address"
+        }
+      ],
+      "name": "_isParticipant",
+      "outputs": [
+        {
+          "name": "isIndeed",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "confirmAttendance",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "cancel",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "cancelEvent",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [],
+      "name": "NewBooking",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewPayment",
+      "type": "event"
+    }
+  ],
+  "metadata": "",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity >=0.4.25 <0.6.0;\r\n\r\nimport { FiatContract } from \"./libs/FiatContract.sol\";\r\nimport { Bookable } from \"./libs/Bookable.sol\";\r\nimport { Refundable } from \"./libs/Refundable.sol\";\r\n\r\n/// @title A contract for event booking between an organizer and multiple participants\r\n/// @author Ruben B. Meseguer\r\n/// @notice You can use this contract for only the most basic simulation\r\n/// @dev All function calls are currently implemented without side effects\r\n\r\ncontract Event is Refundable\r\n{\r\n    \r\n}\r\n",
+  "sourcePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/Event.sol",
+  "ast": {
+    "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/Event.sol",
+    "exportedSymbols": {
+      "Event": [
+        10
+      ]
+    },
+    "id": 11,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/FiatContract.sol",
+        "file": "./libs/FiatContract.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 225,
+        "src": "36:55:0",
+        "symbolAliases": [
+          {
+            "foreign": 2,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/Bookable.sol",
+        "file": "./libs/Bookable.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 187,
+        "src": "93:47:0",
+        "symbolAliases": [
+          {
+            "foreign": 4,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/Refundable.sol",
+        "file": "./libs/Refundable.sol",
+        "id": 7,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 555,
+        "src": "142:51:0",
+        "symbolAliases": [
+          {
+            "foreign": 6,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 8,
+              "name": "Refundable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 554,
+              "src": "486:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Refundable_$554",
+                "typeString": "contract Refundable"
+              }
+            },
+            "id": 9,
+            "nodeType": "InheritanceSpecifier",
+            "src": "486:10:0"
+          }
+        ],
+        "contractDependencies": [
+          186,
+          387,
+          413,
+          473,
+          554
+        ],
+        "contractKind": "contract",
+        "documentation": "@dev All function calls are currently implemented without side effects",
+        "fullyImplemented": false,
+        "id": 10,
+        "linearizedBaseContracts": [
+          10,
+          554,
+          186,
+          473,
+          387,
+          413
+        ],
+        "name": "Event",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 11,
+        "src": "468:40:0"
+      }
+    ],
+    "src": "0:510:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/Event.sol",
+    "exportedSymbols": {
+      "Event": [
+        10
+      ]
+    },
+    "id": 11,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".25",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:0"
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/FiatContract.sol",
+        "file": "./libs/FiatContract.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 225,
+        "src": "36:55:0",
+        "symbolAliases": [
+          {
+            "foreign": 2,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/Bookable.sol",
+        "file": "./libs/Bookable.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 187,
+        "src": "93:47:0",
+        "symbolAliases": [
+          {
+            "foreign": 4,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/mnt/c/xampp/htdocs/hackcoin/contracts/libs/Refundable.sol",
+        "file": "./libs/Refundable.sol",
+        "id": 7,
+        "nodeType": "ImportDirective",
+        "scope": 11,
+        "sourceUnit": 555,
+        "src": "142:51:0",
+        "symbolAliases": [
+          {
+            "foreign": 6,
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 8,
+              "name": "Refundable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 554,
+              "src": "486:10:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Refundable_$554",
+                "typeString": "contract Refundable"
+              }
+            },
+            "id": 9,
+            "nodeType": "InheritanceSpecifier",
+            "src": "486:10:0"
+          }
+        ],
+        "contractDependencies": [
+          186,
+          387,
+          413,
+          473,
+          554
+        ],
+        "contractKind": "contract",
+        "documentation": "@dev All function calls are currently implemented without side effects",
+        "fullyImplemented": false,
+        "id": 10,
+        "linearizedBaseContracts": [
+          10,
+          554,
+          186,
+          473,
+          387,
+          413
+        ],
+        "name": "Event",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 11,
+        "src": "468:40:0"
+      }
+    ],
+    "src": "0:510:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.8",
+  "updatedAt": "2019-04-28T11:11:56.596Z",
+  "devdoc": {
+    "details": "All function calls are currently implemented without side effects",
+    "methods": {
+      "cancel()": {
+        "details": "We're still not set in the refunding conditions."
+      },
+      "confirmAttendance()": {
+        "details": "We're still not sure if sending the money needs to wait a few minutes."
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {
+      "book()": {
+        "notice": "Book a place in the event. Fundation will get 1% of every booking."
+      }
+    }
+  }
+}

@@ -8,8 +8,8 @@ import { Priceable } from "./Priceable.sol";
 
 contract Bookable is Hostable, Priceable
 {
-    function _refund(address participant) internal view returns (uint256);
-    function _refundAll() internal view returns (uint256);
+    function _refund(address participant) internal view;
+    function _refundAll() internal view;
 
     event NewBooking();
 
@@ -50,7 +50,7 @@ contract Bookable is Hostable, Priceable
     }
 
     // Refund all the money. Owner loses deposited money, which is distributed among participants
-    function cancelEvent() public onlyOwner {
+    function cancelEvent() public view onlyOwner {
         _refundAll();        
     }
     

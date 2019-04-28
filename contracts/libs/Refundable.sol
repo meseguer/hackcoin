@@ -10,7 +10,7 @@ import { Bookable } from "./Bookable.sol";
 contract Refundable is Bookable
 {
 
-    function _refund() internal view {
+    function _refund() internal {
         // Check user has booked a place
         require(participants[msg.sender].booked == true);
         // Remove them from array of participants
@@ -36,7 +36,7 @@ contract Refundable is Bookable
     function _canFullRefund() internal view returns (bool) {
         uint totalArrived = getTotalArrived();
         // Check if less than 50 percent of participants have gone
-        return (totalArrived <= (arrayLength / 2));
+        return (totalArrived <= (participantIndex.length / 2));
     }
 
     
