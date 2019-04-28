@@ -1,13 +1,13 @@
 pragma solidity >=0.4.25 <0.6.0;
 
 import { Hostable } from "./Hostable.sol";
+import { Priceable } from "./Priceable.sol";
 
 /// @title Contains functionality to book an event
 /// @notice Allow users to book, cancel and get a refund for an item.
 
-contract Bookable is Hostable
+contract Bookable is Hostable, Priceable
 {
-    function _getFiatCost() internal view returns (uint256);
     function _refund(address participant) internal view returns (uint256);
     function _refundAll() internal view returns (uint256);
 
@@ -24,9 +24,9 @@ contract Bookable is Hostable
     /// @notice Book a place in the event. Fundation will get 1% of every booking.
     function book() public payable {
         // Don't overbook
-        require (participantAddresses.length < limit);
+        require (participantIndex.length < limit);
         // Pay amount required
-        require (msg.value >= _getFiatCost());
+        require(_verifyFiatCost(cost));
 
         _saveParticipant(msg.sender);
         emit NewBooking();

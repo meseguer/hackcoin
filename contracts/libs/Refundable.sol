@@ -18,10 +18,10 @@ contract Refundable is Bookable
         uint amountToRefund;
         if(_canFullRefund()) {
             // Refund 100 percent of the ticket
-            amountToRefund = _getFiatCost() * 7500 / 10000;
+            amountToRefund = _getEtherCost(cost) * 7500 / 10000;
         } else {
             // Refund 75 percent of the ticket
-            amountToRefund = _getFiatCost() * 7500 / 10000;
+            amountToRefund = _getEtherCost(cost) * 7500 / 10000;
         }
         require(msg.sender.send(amountToRefund));
     }
