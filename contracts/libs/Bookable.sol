@@ -13,8 +13,8 @@ contract Bookable is Hostable
 
     event NewBooking();
 
-    uint256 public cost;
-    uint limit;
+    uint public cost;
+    uint public limit;
     
     // Create contract, it costs money to the owner
     constructor(uint256 eventCost) public {
@@ -22,7 +22,6 @@ contract Bookable is Hostable
     }
 
     /// @notice Book a place in the event. Fundation will get 1% of every booking.
-
     function book() public payable {
         // Don't overbook
         require (participantAddresses.length < limit);
@@ -35,13 +34,10 @@ contract Bookable is Hostable
     
     /// @notice Cancel booking, can only get a full refund if less than 50% of the people have confirmed their attendance.
     /// @dev We're still not set in the refunding conditions.
-
     function cancel() public payable {
-        // Check user has booked a place
         require(participants[msg.sender].booked == true);
-        // Remove them from array of participants
-        // Change their status to cancel
         _refund(msg.sender);
+        _removeParticipant(msg.sender);
     }
 
     /// @notice Confirms the user attended the event and sends the money to the organizer.
@@ -53,7 +49,7 @@ contract Bookable is Hostable
         participant.arrived = true;
     }
 
-    // // Refund all the money. Owner loses deposited money, which is distributed among participants
+    // Refund all the money. Owner loses deposited money, which is distributed among participants
     function cancelEvent() public onlyOwner {
         _refundAll();        
     }
