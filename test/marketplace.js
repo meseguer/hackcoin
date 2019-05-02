@@ -1,4 +1,4 @@
-const Event = artifacts.require("Event");
+const Hostable = artifacts.require("Hostable");
 
 contract("Event", accounts => {
   it("should create event costing 100 USD to book", async () => {
