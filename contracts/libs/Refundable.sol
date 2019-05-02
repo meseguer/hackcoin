@@ -10,26 +10,30 @@ import { Bookable } from "./Bookable.sol";
 contract Refundable is Bookable
 {
 
-    // function _refund(address participantAddress) internal {
-    //     // Check user has booked a place
-    //     require(participants[participantAddress].booked == true);
-    //     // Remove them from array of participants
-    //     // Change their status to cancel
-    //     uint amountToRefund;
-    //     if(_canFullRefund()) {
-    //         // Refund 100 percent of the ticket
-    //         amountToRefund = _getEtherCost(cost) * 7500 / 10000;
-    //     } else {
-    //         // Refund 75 percent of the ticket
-    //         amountToRefund = _getEtherCost(cost) * 7500 / 10000;
-    //     }
-    //     address payable payableParticipant = address(uint160(participantAddress)); // This is correct
-    //     require(payableParticipant.send(amountToRefund));
-    // }
+    // Create contract, it costs money to the owner
+    constructor(uint256 eventCost) public Bookable(eventCost) {
+    }
 
-    // function _refundAll() internal view {
+    function _refund(address participantAddress) internal {
+        // Check user has booked a place
+        require(participants[participantAddress].booked == true);
+        // Remove them from array of participants
+        // Change their status to cancel
+        uint amountToRefund;
+        if(_canFullRefund()) {
+            // Refund 100 percent of the ticket
+            amountToRefund = _getEtherCost(cost) * 7500 / 10000;
+        } else {
+            // Refund 75 percent of the ticket
+            amountToRefund = _getEtherCost(cost) * 7500 / 10000;
+        }
+        address payable payableParticipant = address(uint160(participantAddress)); // This is correct
+        require(payableParticipant.send(amountToRefund));
+    }
 
-    // }
+    function _refundAll() internal view {
+
+    }
 
     
     /// @notice Confirms the user attended the event and sends the money to the organizer.
