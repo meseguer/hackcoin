@@ -1,11 +1,5 @@
-// const Event = artifacts.require("Event");
-// const Refundable = artifacts.require("Refundable");
-// const Owned = artifacts.require("Owned");
-const Refundable = artifacts.require("Refundable");
+const Event = artifacts.require("Event");
 
 module.exports = function(deployer) {
-  // deployer.deploy(Owned);
-  // deployer.link(EventBooking, Owned);
-  // deployer.deploy(Event);
-  deployer.deploy(Refundable, 10);
+  // deployer.deploy(Event, 10);
 };

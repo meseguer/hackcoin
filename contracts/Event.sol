@@ -11,5 +11,8 @@ import { Refundable } from "./libs/Refundable.sol";
 
 contract Event is Refundable
 {
+    // Create contract, it costs money to the owner
+    constructor(uint256 eventCost) public Refundable(eventCost) {
     
+    }
 }
