@@ -18,7 +18,7 @@ contract Hostable is Owned
     address[] public participantIndex;
 
     function _saveParticipant(address participantAddress) internal {
-        require(_isParticipant(participantAddress)); 
+        require(_isParticipant(participantAddress), "Participant has been saved already.");
         
         participants[participantAddress].booked = true;
         participants[participantAddress].index = participantIndex.push(participantAddress) - 1;
@@ -26,7 +26,7 @@ contract Hostable is Owned
     }
 
     function _removeParticipant(address participantAddress) internal {
-        require(_isParticipant(participantAddress));
+        require(_isParticipant(participantAddress), "User isn't a participant");
         // Remove them from lookup table
         uint rowToDelete = participants[participantAddress].index;
         // Get last row address
@@ -34,7 +34,7 @@ contract Hostable is Owned
         // Set it to the new position
         participantIndex[rowToDelete] = keyToMove;
         // And fix its index
-        participants[keyToMove].index = rowToDelete; 
+        participants[keyToMove].index = rowToDelete;
         // The other value will be lost since it now isnt part of the lookup table
         participantIndex.length--;
     }
@@ -52,7 +52,7 @@ contract Hostable is Owned
     }
 
     function _isParticipant(address participantAddress) public view returns(bool isIndeed) {
-        if(participantIndex.length == 0) { 
+        if(participantIndex.length == 0) {
             return false;
         }
         return (participantIndex[participants[participantAddress].index] == participantAddress);
